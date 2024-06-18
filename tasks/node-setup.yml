@@ -27,7 +27,7 @@
 - name: npmjs global settings export path in case I don't have dotfiles installed
   shell: |
     echo 'export PATH=~/.local/.npm-global/bin:$PATH' >> ~/.profile
-    source ~/.profile
+    . ~/.profile
   tags:
     - install
     - node
@@ -42,7 +42,7 @@
     - node
 
 - name: Reload shell to include new PATH
-  shell: source ~/.profile
+  shell: . ~/.profile
   tags:
     - install
     - node
