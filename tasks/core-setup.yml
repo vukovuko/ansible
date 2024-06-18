@@ -10,7 +10,7 @@
 - name: Install System Packages 2 (lua, lua5.1, unzip, libtool, libtool-bin, gettext)
   become: true
   apt:
-    name: ["lua", "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
+    name: ["lua5.3", "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
   tags:
     - install
     - neovim

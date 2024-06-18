@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get install -y software-properties-common curl git build-essential sudo vim && \
     apt-add-repository -y ppa:ansible/ansible && \
     apt-get update && \
-    apt-get install -y ansible && \
+    apt-get install -y ansible zsh && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
 
@@ -28,5 +28,5 @@ WORKDIR /home/thevuko
 # Copy files
 COPY . .
 
-# Set entrypoint to bash to keep the container running for manual commands
-CMD ["sh", "-c", "ansible-playbook $TAGS local.yml"]
+# Run Ansible playbook and then start zsh shell
+CMD ["sh", "-c", "ansible-playbook $TAGS local.yml && exec zsh"]
