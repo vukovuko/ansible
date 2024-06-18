@@ -16,7 +16,10 @@
   tags: *tags_for_zsh_tasks
 
 - name: Oh-My-Zsh
-  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  shell: |
+    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer
+    chmod +x ~/.oh-my-installer
+    ~/.oh-my-installer
   tags: *tags_for_zsh_tasks
   when: oh_my_stats.stat.exists == False
   become_user: thevuko
@@ -25,4 +28,18 @@
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+  tags: *tags_for_zsh_tasks
+
+- name: Update .zshrc
+  lineinfile:
+    path: /home/thevuko/.zshrc
+    regexp: 'plugins=\(.*\)'
+    line: "plugins=(git zsh-autosuggestions)"
+    state: present
+  tags: *tags_for_zsh_tasks
+
+- name: Source .zshrc
+  shell: source ~/.zshrc
+  args:
+    executable: /bin/zsh
   tags: *tags_for_zsh_tasks
