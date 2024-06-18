@@ -10,23 +10,24 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install dependencies
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y software-properties-common curl git build-essential && \
+    apt-get install -y software-properties-common curl git build-essential sudo && \
     apt-add-repository -y ppa:ansible/ansible && \
     apt-get update && \
-    apt-get install -y curl git ansible build-essential && \
+    apt-get install -y ansible && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
 
 # Create user and set permissions
-FROM base AS vuko
-ARG TAGS
-RUN addgroup --gid 1000 thevuko
-RUN adduser --gecos thevuko --uid 1000 --gid 1000 --disabled-password thevuko
+RUN addgroup --gid 1000 thevuko && \
+    adduser --gecos thevuko --uid 1000 --gid 1000 --disabled-password thevuko && \
+    echo "thevuko ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER thevuko
 WORKDIR /home/thevuko
 
-# Copy files and set CMD
-FROM vuko
+# Copy files
 COPY . .
-CMD ["sh", "-c", "ansible-playbook $TAGS local.yml"]
+
+# Set entrypoint to bash to keep the container running for manual commands
+CMD ["bash"]
 
