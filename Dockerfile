@@ -29,5 +29,4 @@ WORKDIR /home/thevuko
 COPY . .
 
 # Set entrypoint to bash to keep the container running for manual commands
-CMD ["bash"]
-
+CMD ["sh", "-c", "ansible-playbook $TAGS local.yml"]

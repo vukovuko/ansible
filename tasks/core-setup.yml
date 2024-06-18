@@ -7,10 +7,10 @@
     - neovim
     - core
 
-- name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
+- name: Install System Packages 2 (lua, lua5.1, unzip, libtool, libtool-bin, gettext)
   become: true
   apt:
-    name: ["lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
+    name: ["lua", "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
   tags:
     - install
     - neovim
@@ -26,16 +26,13 @@
         "htop",
         "golang",
         "lsof",
-        "i3",
         "ccache",
         "ninja-build",
         "python3-pip",
-        "dconf-editor",
         "nvidia-settings",
         "pavucontrol",
         "moreutils",
         "clangd",
-        "ubuntu-mate-desktop",
       ]
   tags:
     - install
