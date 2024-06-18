@@ -47,8 +47,20 @@
     - install
     - node
 
+- name: Set N_PREFIX environment variable
+  shell: echo 'export N_PREFIX=~/.local' >> ~/.profile
+  tags:
+    - install
+    - node
+
+- name: Reload shell to include N_PREFIX
+  shell: . ~/.profile
+  tags:
+    - install
+    - node
+
 - name: Install correct version of Node
-  shell: ~/.local/.npm-global/bin/n 14
+  shell: N_PREFIX=~/.local ~/.local/.npm-global/bin/n 14
   tags:
     - install
     - node
