@@ -5,7 +5,8 @@
   tags: &tags_for_zsh_tasks ["install", "productivity", "dotfiles", "zsh"]
 
 - name: Change shell to zsh
-  shell: chsh -s $(which zsh)
+  become: true
+  shell: sed -i 's|/home/thevuko:/bin/bash|/home/thevuko:/usr/bin/zsh|' /etc/passwd
   tags: *tags_for_zsh_tasks
 
 - name: Check that the somefile.conf exists
