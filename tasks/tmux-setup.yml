@@ -10,5 +10,4 @@
     repo: "https://github.com/tmux-plugins/tpm.git"
     dest: /home/thevuko/.tmux/plugins/tpm
   become: true
-  become_user: thevuko
   tags: tmux
