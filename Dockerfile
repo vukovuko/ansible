@@ -28,6 +28,5 @@ WORKDIR /home/thevuko
 # Copy files
 COPY . .
 
-# Run Ansible playbook and then start zsh shell
-CMD ["sh", "-c", "ansible-playbook local.yml && exec zsh"]
-
+# Set the default command to start a zsh shell
+CMD ["bash"]
