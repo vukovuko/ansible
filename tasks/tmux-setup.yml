@@ -2,7 +2,6 @@
   become: true
   apt:
     name: tmux
-    state: present
   tags:
     - install
     - tmux
