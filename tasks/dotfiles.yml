@@ -22,27 +22,21 @@
     - dotfiles
     - stow
 
-- name: Ensure ubuntu script is executable
-  file:
-    path: "{{ lookup('env', 'HOME') }}/.dotfiles/ubuntu"
-    mode: "0755"
-    state: file
-    owner: thevuko
-    group: thevuko
-  become: true
-  tags:
-    - install
-    - dotfiles
-    - stow
+- name: Ensure all scripts in .dotfiles are executable
+  find:
+    paths: "{{ lookup('env', 'HOME') }}/.dotfiles"
+    patterns: "*"
+    recurse: yes
+    file_type: file
+  register: dotfiles_scripts
 
-- name: Ensure install script is executable
+- name: Set executable permissions for all scripts
   file:
-    path: "{{ lookup('env', 'HOME') }}/.dotfiles/install"
+    path: "{{ item.path }}"
     mode: "0755"
-    state: file
-    owner: thevuko
-    group: thevuko
+  with_items: "{{ dotfiles_scripts.files }}"
   become: true
+  become_user: thevuko
   tags:
     - install
     - dotfiles
