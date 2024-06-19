@@ -1,12 +1,14 @@
 - name: Install tmux
+  become: true
   package:
     name: tmux
     state: present
   tags: tmux
+
 - name: Clone TPM repository
   git:
     repo: "https://github.com/tmux-plugins/tpm.git"
-    dest: /home/willian/.tmux/plugins/tpm
+    dest: /home/thevuko/.tmux/plugins/tpm
   become: true
   become_user: thevuko
   tags: tmux
