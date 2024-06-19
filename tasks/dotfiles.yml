@@ -1,3 +1,14 @@
+- name: Wait for dpkg lock to be released
+  become: true
+  shell: |
+    while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do
+      echo "Waiting for dpkg lock..."
+      sleep 1
+    done
+  tags:
+    - install
+    - stow
+
 - name: Installing stow
   apt:
     name: stow
