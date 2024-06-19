@@ -6,13 +6,3 @@
   tags:
     - install
     - tmux
-
-- name: Clone TPM repository
-  become: true
-  become_user: thevuko
-  ansible.builtin.git:
-    repo: "https://github.com/tmux-plugins/tpm.git"
-    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
-  tags:
-    - install
-    - tmux
