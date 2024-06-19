@@ -34,6 +34,18 @@
     - dotfiles
     - stow
 
+- name: Ensure install script is executable
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.dotfiles/install"
+    mode: "0755"
+    state: file
+  become: true
+  become_user: thevuko
+  tags:
+    - install
+    - dotfiles
+    - stow
+
 - name: Stow dotfiles
   shell: cd $HOME/.dotfiles && ./ubuntu
   become: true
