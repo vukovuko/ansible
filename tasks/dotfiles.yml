@@ -1,22 +1,13 @@
-- name: Wait for dpkg lock to be released
-  become: true
-  shell: |
-    while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do
-      echo "Waiting for dpkg lock..."
-      sleep 1
-    done
-  tags:
-    - install
-    - stow
-
 - name: Installing stow
   apt:
     name: stow
   become: true
+  become_user: thevuko
   tags:
     - install
     - dotfiles
     - stow
+
 - name: Cloning .dotfiles
   ansible.builtin.git:
     repo: "https://github.com/vukovuko/.dotfiles"
@@ -25,12 +16,17 @@
     update: yes
     accept_hostkey: yes
     version: master
+  become: true
+  become_user: thevuko
   tags:
     - install
     - dotfiles
     - stow
+
 - name: Stow dotfiles
   shell: cd $HOME/.dotfiles && ./ubuntu
+  become: true
+  become_user: thevuko
   tags:
     - install
     - dotfiles
