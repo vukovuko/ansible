@@ -1,13 +1,18 @@
 - name: Install tmux
   become: true
-  package:
+  apt:
     name: tmux
     state: present
-  tags: tmux
+  tags:
+    - install
+    - tmux
 
 - name: Clone TPM repository
-  git:
-    repo: "https://github.com/tmux-plugins/tpm.git"
-    dest: /home/thevuko/.tmux/plugins/tpm
   become: true
-  tags: tmux
+  become_user: thevuko
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm.git"
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+  tags:
+    - install
+    - tmux
