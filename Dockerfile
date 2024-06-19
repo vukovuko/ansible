@@ -7,7 +7,7 @@ WORKDIR /usr/local/bin
 # Set non-interactive frontend for apt-get
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
+# Install dependencies as root
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y software-properties-common curl git build-essential sudo vim && \
@@ -30,3 +30,4 @@ COPY . .
 
 # Run Ansible playbook and then start zsh shell
 CMD ["sh", "-c", "ansible-playbook local.yml && exec zsh"]
+

@@ -2,7 +2,6 @@
   apt:
     name: stow
   become: true
-  become_user: thevuko
   tags:
     - install
     - dotfiles
