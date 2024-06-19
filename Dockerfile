@@ -29,4 +29,4 @@ WORKDIR /home/thevuko
 COPY . .
 
 # Run Ansible playbook and then start zsh shell
-CMD ["sudo", "ansible-playbook", "$TAGS", "local.yml", "&&", "exec", "zsh"]
+CMD ["sh", "-c", "ansible-playbook local.yml && exec zsh"]
