@@ -27,3 +27,7 @@ Run the Ansible playbook
 ```bash
 ansible-pull -U https://github.com/vukovuko/ansible.git
 ```
+
+2. Install tmux plugins
+
+Go into tmux and press <C-b> (prefix) + I.
