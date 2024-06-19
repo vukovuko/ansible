@@ -30,3 +30,4 @@ COPY . .
 
 # Run Ansible playbook and then start zsh shell
 CMD ["sh", "-c", "ansible-playbook $TAGS local.yml && exec zsh"]
+

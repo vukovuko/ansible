@@ -1,7 +1,29 @@
+- name: Wait for dpkg lock to be released
+  become: true
+  shell: |
+    while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do
+      echo "Waiting for dpkg lock..."
+      sleep 1
+    done
+  tags:
+    - install
+    - tmux
+
 - name: Install tmux
   become: true
   apt:
     name: tmux
+    state: present
+  tags:
+    - install
+    - tmux
+
+- name: Clone TPM repository
+  become: true
+  become_user: thevuko
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm.git"
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
   tags:
     - install
     - tmux
