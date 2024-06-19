@@ -27,8 +27,9 @@
     path: "{{ lookup('env', 'HOME') }}/.dotfiles/ubuntu"
     mode: "0755"
     state: file
+    owner: thevuko
+    group: thevuko
   become: true
-  become_user: thevuko
   tags:
     - install
     - dotfiles
@@ -39,8 +40,9 @@
     path: "{{ lookup('env', 'HOME') }}/.dotfiles/install"
     mode: "0755"
     state: file
+    owner: thevuko
+    group: thevuko
   become: true
-  become_user: thevuko
   tags:
     - install
     - dotfiles
